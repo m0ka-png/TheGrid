@@ -1,0 +1,79 @@
+<style>
+    /* 1. Import des polices (Garde celle que tu as choisie avant, ici Anton par ex) */
+    @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap'); /* Police lisible pour les noms */
+
+    :root {
+        --primary: #ff003c; /* Rouge The House */
+        --text: #ffffff;
+        /* Modification pour la lisibilité sur l'image */
+        --card-bg: rgba(26, 26, 26, 0.85); /* Fond sombre mais transparent */
+    }
+
+    /* 2. Application de l'image de fond sur tout le site */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif; /* Police de base propre */
+        
+        /* Inclusion de l'image (assure-toi du nom du fichier) */
+        background-image: url('background.jpg'); 
+        background-size: cover;        /* L'image couvre tout l'écran */
+        background-position: center;  /* Centrée */
+        background-attachment: fixed; /* L'image ne scrolle pas avec la page (effet pro) */
+        background-repeat: no-repeat;
+        
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        color: var(--text);
+    }
+
+    .container {
+        width: 100%;
+        max-width: 700px;
+        padding: 40px 20px;
+        /* Optionnel : un léger dégradé noir en haut pour le titre */
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 20%);
+    }
+
+    /* 3. Ton titre stylé (Option 2 Anton comme exemple) */
+    .top-tiers-title {
+        font-family: 'Anton', sans-serif;
+        font-size: 3.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        color: #ffffff;
+        letter-spacing: 2px;
+        background: linear-gradient(0deg, var(--primary) 0%, #ffffff 50%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 10px rgba(255,0,60,0.7));
+        margin-bottom: 50px;
+    }
+
+    /* 4. Les cases, rendues transparentes */
+    .ranking-item {
+        background: var(--card-bg); /* Transparence ici */
+        backdrop-filter: blur(5px);   /* Effet verre dépoli (très moderne) */
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        margin-bottom: 15px;
+        padding: 20px;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .ranking-item:hover {
+        transform: scale(1.03) translateY(-3px);
+        border-color: var(--primary);
+        box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+    }
+
+    /* Style du Top 1 (Légende) */
+    .ranking-item:first-child {
+        border: 2px solid gold;
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+        background: rgba(26, 26, 26, 0.9);
+    }
+</style>
