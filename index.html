@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement Pilotes & Voitures</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 { text-align: center; color: var(--primary); }
+
+        .ranking-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ranking-item {
+            background: var(--card);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .ranking-item:hover {
+            transform: translateX(10px);
+            border-left: 5px solid var(--primary);
+        }
+
+        .rank {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            color: var(--primary);
+            min-width: 30px;
+        }
+
+        .info { flex-grow: 1; }
+        .name { font-weight: 600; display: block; }
+        .car { font-size: 0.9rem; color: #64748b; }
+
+        /* Style de la "Pop-up" Profil */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 24px; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏆 Top 10 Pilotes</h1>
+    <h1 class="top-tiers-title">The Grid</h1>
+    <div id="ranking" class="ranking-list">
+        </div>
+</div>
+
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeProfile()">&times;</span>
+        <h2 id="modalName">Nom du Pilote</h2>
+        <p><strong>Voiture :</strong> <span id="modalCar">Modèle</span></p>
+        <p id="modalBio">Ceci est la description détaillée du profil.</p>
+    </div>
+</div>
+
+<script>
+    // Tes données (Tu peux les modifier ici)
+    const pilots = [
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" },
+        { name: "Nom prénom", car: "Véhicules", bio: "Biographie" }
+    ];
+
+    const rankingContainer = document.getElementById('ranking');
+
+    // Génération automatique du classement
+    pilots.forEach((pilot, index) => {
+        const item = document.createElement('div');
+        item.className = 'ranking-item';
+        item.onclick = () => showProfile(index);
+        
+        item.innerHTML = `
+            <div class="rank">#${index + 1}</div>
+            <div class="info">
+                <span class="name">${pilot.name}</span>
+                <span class="car">${pilot.car}</span>
+            </div>
+        `;
+        rankingContainer.appendChild(item);
+    });
+
+    // Fonctions pour la fenêtre profil
+    function showProfile(index) {
+        const pilot = pilots[index];
+        document.getElementById('modalName').innerText = pilot.name;
+        document.getElementById('modalCar').innerText = pilot.car;
+        document.getElementById('modalBio').innerText = pilot.bio;
+        document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    function closeProfile() {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    // Fermer si on clique à côté de la fenêtre
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('profileModal')) {
+            closeProfile();
+        }
+    }
+
+</script>
+
+</body>
+</html>
+<style>
+    :root {
+        --primary: #ff003c; /* Rouge néon agressif */
+        --bg: #0a0a0a;    /* Noir profond */
+        --card: #1a1a1a;  /* Gris très sombre */
+        --text: #ffffff;
+        --accent: #ff003c;
+    }
+
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: 'Orbitron', sans-serif; /* Police futuriste/course */
+    }
+
+    .ranking-item {
+        background: var(--card);
+        border: 1px solid #333;
+        transition: 0.3s;
+    }
+
+    .ranking-item:hover {
+        transform: scale(1.02);
+        border-color: var(--primary);
+        box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+    }
+
+    h1 {
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        text-shadow: 0 0 10px var(--primary);
+    }
+    
+    /* Animation pour le Top 1 */
+    .ranking-item:first-child {
+        border: 2px solid gold;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+</style>
+
